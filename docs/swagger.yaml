@@ -1,0 +1,105 @@
+basePath: /
+definitions:
+  models.BlogPost:
+    properties:
+      body:
+        type: string
+      created_at:
+        type: string
+      descriptions:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a simple blog CRUD API in Go.
+  title: Blog CRUD API
+  version: "1.0"
+paths:
+  /api/blog-post:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BlogPost'
+            type: array
+      summary: Get all blog posts
+    post:
+      parameters:
+      - description: Blog Post
+        in: body
+        name: blog
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+      summary: Create a blog post
+  /api/blog-post/{id}:
+    delete:
+      parameters:
+      - description: Blog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted Successfully
+          schema:
+            type: string
+      summary: Delete a blog post
+    get:
+      parameters:
+      - description: Blog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+      summary: Get a blog post by ID
+    patch:
+      parameters:
+      - description: Blog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Blog Post
+        in: body
+        name: blog
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+      summary: Update a blog post
+swagger: "2.0"
